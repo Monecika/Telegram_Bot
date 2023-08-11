@@ -4,11 +4,14 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Respond extends TelegramLongPollingBot {
     private final Bot bot = new Bot();
 
     private final Data data = new Data();
+
     int index = 1;
     String lastCommand = null;
 

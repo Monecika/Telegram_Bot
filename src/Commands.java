@@ -11,7 +11,7 @@ public class Commands {
     public String commands() {
         return "By using our service, you receive an access for the following functionality: \n" +
                 "1. commands -> Get the list of the commands you have access to \n" +
-                "2. add -> Add a person in your contact lits \n" +
+                "2. add -> Add a person in your contact list \n" +
                 "3. view -> View the event list \n" +
                 "4. edit -> Edit an event from your list";
     }
