@@ -28,7 +28,7 @@ public class Data {
             }
             case 3 -> {
                 event = response;
-                message.setText("Set the date when you will be notified: ");
+                message.setText("Set the date when you will be notified (yyyy-dd-mm): ");
                 respond.sendApi(message);
             }
             case 4 -> {

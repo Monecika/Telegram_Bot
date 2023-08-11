@@ -1,6 +1,8 @@
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
     public Statement connection() {
@@ -99,5 +101,40 @@ public class Database {
 
         Respond respond = new Respond();
         respond.sendApi(message);
+    }
+
+    public List<Event> getEventsToNotify(String date, String chatID) {
+        List<Event> list = new ArrayList<>();
+        Statement statement = connection();
+
+        String sql = "SELECT evenType, time, chatID FROM users WHERE time = '" + date + "' and chatID = '" + chatID + "';";
+
+        try {
+            ResultSet set = statement.executeQuery(sql);
+            while (set.next()) {
+                list.add(new Event(set.getString("evenType"), set.getString("time"),set.getString("chatID")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return list;
+    }
+
+    public List<String> getChatID() {
+        List<String> list = new ArrayList<>();
+        Statement statement = connection();
+
+        String sql = "SELECT DISTINCT chatID FROM users";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while(resultSet.next()){
+                list.add(resultSet.getString("chatID"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
     }
 }
